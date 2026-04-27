@@ -2,99 +2,118 @@ import { useState } from "react";
 
 export default function App() {
   const [name, setName] = useState("");
-  const [title, setTitle] = useState("");
-  const [url, setUrl] = useState("");
-  const [links, setLinks] = useState([]);
 
-  const addLink = () => {
-    if (!title || !url) return;
-    setLinks([...links, { title, url }]);
-    setTitle("");
-    setUrl("");
-  };
+  const studentLinks = [
+    {
+      title: "📘 Free Study Notes",
+      url: "https://www.khanacademy.org/",
+    },
+    {
+      title: "🤖 AI Study Tools",
+      url: "https://chat.openai.com/",
+    },
+    {
+      title: "📚 Online Courses",
+      url: "https://www.coursera.org/",
+    },
+    {
+      title: "✍️ Assignment Help Tools",
+      url: "https://www.grammarly.com/",
+    },
+  ];
+
+  const shoppingLinks = [
+    {
+      title: "🔥 Amazon Deals",
+      url: "https://www.amazon.com/",
+    },
+    {
+      title: "📱 Mobile Accessories",
+      url: "https://www.amazon.com/s?k=mobile+accessories",
+    },
+    {
+      title: "🎧 Headphones Deals",
+      url: "https://www.amazon.com/s?k=headphones",
+    },
+    {
+      title: "💻 Laptop Deals",
+      url: "https://www.amazon.com/s?k=laptop",
+    },
+  ];
 
   return (
-    <div style={{
-      minHeight: "100vh",
-      background: "#0f172a",
-      color: "white",
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      padding: 20,
-      fontFamily: "Arial"
-    }}>
-      <h1>🔥 LinkHub</h1>
+    <div style={styles.page}>
+      <h1>🚀 My LinkHub</h1>
 
       <input
-        placeholder="Your Name"
+        placeholder="Enter Your Name"
         value={name}
         onChange={(e) => setName(e.target.value)}
-        style={inputStyle}
+        style={styles.input}
       />
 
-      <input
-        placeholder="Link Title"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        style={inputStyle}
-      />
+      <h2>🎓 Student Study Tools</h2>
 
-      <input
-        placeholder="URL"
-        value={url}
-        onChange={(e) => setUrl(e.target.value)}
-        style={inputStyle}
-      />
+      {studentLinks.map((item, i) => (
+        <a
+          key={i}
+          href={item.url}
+          target="_blank"
+          rel="noreferrer"
+          style={styles.link}
+        >
+          {item.title}
+        </a>
+      ))}
 
-      <button onClick={addLink} style={buttonStyle}>
-        Add Link
-      </button>
+      <h2 style={{ marginTop: 30 }}>🛍️ Shopping Deals</h2>
 
-      <h2 style={{ marginTop: 30 }}>
-        {name ? `${name}'s Page` : "My Links"}
-      </h2>
+      {shoppingLinks.map((item, i) => (
+        <a
+          key={i}
+          href={item.url}
+          target="_blank"
+          rel="noreferrer"
+          style={styles.link}
+        >
+          {item.title}
+        </a>
+      ))}
 
-      <div style={{ width: "100%", maxWidth: 400 }}>
-        {links.map((l, i) => (
-          <a
-            key={i}
-            href={l.url}
-            target="_blank"
-            style={linkStyle}
-          >
-            🔗 {l.title}
-          </a>
-        ))}
-      </div>
+      <h3 style={{ marginTop: 30 }}>
+        {name ? `Welcome ${name} 👋` : "Welcome 👋"}
+      </h3>
     </div>
   );
 }
 
-const inputStyle = {
-  width: "100%",
-  maxWidth: 400,
-  padding: 10,
-  margin: 5,
-  borderRadius: 8,
-  border: "none"
-};
-
-const buttonStyle = {
-  padding: 10,
-  marginTop: 10,
-  background: "#22c55e",
-  border: "none",
-  borderRadius: 8,
-  cursor: "pointer"
-};
-
-const linkStyle = {
-  display: "block",
-  padding: 12,
-  margin: 8,
-  background: "#1e293b",
-  color: "white",
-  textDecoration: "none",
-  borderRadius: 8
+const styles = {
+  page: {
+    minHeight: "100vh",
+    background: "#0f172a",
+    color: "white",
+    textAlign: "center",
+    padding: 20,
+    fontFamily: "Arial",
+  },
+  input: {
+    padding: 10,
+    width: "80%",
+    maxWidth: 300,
+    borderRadius: 8,
+    border: "none",
+    margin: 10,
+  },
+  link: {
+    display: "block",
+    width: "80%",
+    maxWidth: 300,
+    margin: "10px auto",
+    padding: 12,
+    background: "#1e293b",
+    color: "white",
+    textDecoration: "none",
+    borderRadius: 8,
+    cursor: "pointer",
+  },
 };
