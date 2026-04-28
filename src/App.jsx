@@ -3,12 +3,9 @@ import { useState } from "react";
 export default function App() {
   const [name, setName] = useState("");
 
-  // CLICK TRACKER
   const handleClick = (title, url) => {
-    // simple tracking (you can later connect Google Analytics)
     console.log("Clicked:", title);
 
-    // optional local storage tracking
     const data = JSON.parse(localStorage.getItem("clicks") || "[]");
     data.push({ title, time: new Date().toISOString() });
     localStorage.setItem("clicks", JSON.stringify(data));
@@ -16,6 +13,7 @@ export default function App() {
     window.open(url, "_blank");
   };
 
+  // 🎓 STUDENT LINKS
   const studentLinks = [
     {
       title: "📘 Free Study Notes",
@@ -35,29 +33,30 @@ export default function App() {
     },
   ];
 
-  const amazonLinks = [
+  // 🛍️ YOUR AFFILIATE LINKS (EDIT HERE)
+  const shoppingLinks = [
     {
-      title: "🔥 Amazon Best Deals",
-      url: "https://www.amazon.com/?tag=YOUR_AFFILIATE_ID",
+      title: "🎧 Headphones Deals",
+      url: "https://s.click.aliexpress.com/e/_c4b8yIt1",
     },
     {
       title: "📱 Mobile Accessories",
-      url: "https://www.amazon.com/s?k=mobile+accessories&tag=YOUR_AFFILIATE_ID",
+      url: "#",
     },
     {
-      title: "🎧 Headphones Deals",
-      url: "https://www.amazon.com/s?k=headphones&tag=YOUR_AFFILIATE_ID",
+      title: "💻 Laptop Accessories",
+      url: "#",
     },
     {
-      title: "💻 Student Laptop Deals",
-      url: "https://www.amazon.com/s?k=laptop&tag=YOUR_AFFILIATE_ID",
+      title: "🔥 Best Deals",
+      url: "#",
     },
   ];
 
   return (
     <div style={styles.page}>
       <div style={styles.card}>
-        <h1>💰 LinkHub Money Dashboard</h1>
+        <h1>💰 Nazaad LinkHub</h1>
 
         <input
           placeholder="Enter Your Name"
@@ -66,12 +65,9 @@ export default function App() {
           style={styles.input}
         />
 
-        <p style={{ opacity: 0.7 }}>
-          {name ? `Welcome ${name} 👋` : "Welcome 👋"}
-        </p>
+        <p>{name ? `Welcome ${name} 👋` : "Welcome 👋"}</p>
       </div>
 
-      {/* STUDY SECTION */}
       <h2>🎓 Student Study Tools</h2>
       {studentLinks.map((item, i) => (
         <button
@@ -83,9 +79,8 @@ export default function App() {
         </button>
       ))}
 
-      {/* AMAZON SECTION */}
-      <h2 style={{ marginTop: 30 }}>🛍️ Amazon Deals (Earn Money)</h2>
-      {amazonLinks.map((item, i) => (
+      <h2 style={{ marginTop: 30 }}>🛍️ Shopping Deals</h2>
+      {shoppingLinks.map((item, i) => (
         <button
           key={i}
           onClick={() => handleClick(item.title, item.url)}
@@ -95,8 +90,8 @@ export default function App() {
         </button>
       ))}
 
-      <p style={{ marginTop: 30, fontSize: 12, opacity: 0.6 }}>
-        ⚡ Tip: Replace YOUR_AFFILIATE_ID with your Amazon affiliate tag
+      <p style={{ marginTop: 20, fontSize: 12, opacity: 0.6 }}>
+        💡 Tip: Add more affiliate links to increase earnings
       </p>
     </div>
   );
@@ -111,24 +106,21 @@ const styles = {
     padding: 20,
     fontFamily: "Arial",
   },
-
   card: {
     background: "#111827",
     padding: 20,
     borderRadius: 15,
     marginBottom: 20,
   },
-
   input: {
-    padding: 12,
+    padding: 10,
     width: "80%",
     maxWidth: 300,
-    borderRadius: 10,
+    borderRadius: 8,
     border: "none",
     marginTop: 10,
     textAlign: "center",
   },
-
   button: {
     display: "block",
     width: "90%",
@@ -142,6 +134,5 @@ const styles = {
     fontSize: 16,
     cursor: "pointer",
     fontWeight: "bold",
-    boxShadow: "0 4px 10px rgba(0,0,0,0.3)",
   },
 };
